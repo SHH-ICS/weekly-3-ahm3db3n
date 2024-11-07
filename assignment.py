@@ -1,4 +1,3 @@
-
 LARGE_PRICE = 6.00
 EXTRA_LARGE_PRICE = 10.00
 
@@ -19,7 +18,7 @@ def calculate_pizza_cost(size, toppings):
         base_price = EXTRA_LARGE_PRICE
     else:
         print("Invalid pizza size.")
-        return None
+        return None, None, None
     
     topping_cost = TOPPING_PRICES.get(toppings, 0)
     
@@ -33,28 +32,22 @@ def main():
     print("Welcome to the Pizza Order System!")
     
     size = input("Enter the pizza size (large/extra large): ").lower()
-    if size not in ['large', 'extra large']:
-        print("Invalid pizza size. Please try again.")
-        return
     
-  
     try:
         toppings = int(input("Enter the number of toppings (1-4): "))
-        if toppings not in [1, 2, 3, 4]:
+        if toppings not in TOPPING_PRICES:
             print("Invalid number of toppings. Please try again.")
             return
     except ValueError:
         print("Invalid input. Please enter a number between 1 and 4.")
         return
     
-  
     subtotal, tax, total = calculate_pizza_cost(size, toppings)
     
-    
-    print(f"\nSubtotal: ${subtotal:.2f}")
-    print(f"Tax (HST @ 13%): ${tax:.2f}")
-    print(f"Total: ${total:.2f}")
-  
+    if subtotal is not None:
+        print(f"\nSubtotal: ${subtotal:.2f}")
+        print(f"Tax (HST @ 13%): ${tax:.2f}")
+        print(f"Total: ${total:.2f}")
+
 if __name__ == "__main__":
     main()
-
